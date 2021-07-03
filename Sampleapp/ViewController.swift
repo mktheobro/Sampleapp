@@ -45,6 +45,36 @@ class ViewController: UIViewController {
         setUpLabel("重傷者数", size: size, centerX: rightX, y: 120, font: labelFont, color: color, contentView)
         setUpLabel("死者数", size: size, centerX: leftX, y: 220, font: labelFont, color: color, contentView)
         setUpLabel("通院者数", size: size, centerX: rightX, y: 220, font: labelFont, color: color, contentView)
+        setUpLabel("退院者数", size: size, centerX: rightX, y: 220, font: labelFont, color: color, contentView)
+        
+        let height = view.frame.size.height / 2
+        setUpButton("健康管理", size: size, y: height + 190, color: colors.blue, parentView: view)
+        setUpButton("県別状況", size: size, y: height + 240, color: colors.blue, parentView: view)
+        setUpImageButton("chat", x: view.frame.size.width - 50).addTarget(self, action: #selector(chatAction), for: .touchDown)
+    }
+    func setUpImageButton(_ name: String, x: CGFloat) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: name), for: .normal)
+        button.frame.size = CGSize(width: 30, height: 30)
+        button.tintColor = .white
+        button.frame.origin = CGPoint(x: x, y: 25)
+        view.addSubview(button)
+        return button
+    }
+    @objc func chatAction(){
+        print("タップchat")
+    }
+    
+    func setUpButton(_ title: String, size: CGSize, y: CGFloat, color: UIColor, parentView: UIView){
+        let button = UIButton(type: .system)
+        button.setTitle(title, for: .normal)
+        button.frame.size = size
+        button.center.x = view.center.x
+        let attributedTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.kern: 8.0])
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.frame.origin.y = y
+        button.setTitleColor(color, for: .normal)
+        parentView.addSubview(button)
     }
     
     func setUpLabel(_ text: String, size: CGSize, centerX: CGFloat,y: CGFloat, font: UIFont, color: UIColor, _ parentView: UIView){
